@@ -80,7 +80,7 @@ export default function RecipeCard({ recipe }) {
 
           sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
         >
-          <Card sx={{ maxWidth: "80%", borderRadius: "10px", alignItems: "center", justifyContent: "center" }}>
+          <Card sx={{ maxWidth: "80%", height: "80%", borderRadius: "10px", alignItems: "center", justifyContent: "center", overflow: "scroll" }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -128,9 +128,12 @@ export default function RecipeCard({ recipe }) {
               ))}
             </CardContent>
             {/* Close modal */}
-            <Button onClick={handleRecipeViewClose} sx={{...myColorScheme.buttonStyle}}>
-              Close
-            </Button>
+            
+            <Box width={"100%"} display={"flex"} justifyContent={"center"} alignContent={"center"}>
+              <Button onClick={handleRecipeViewClose} sx={{...myColorScheme.buttonStyle}}>
+                Close
+              </Button>
+            </Box>
           </Card>
         </Modal>
       </Card>

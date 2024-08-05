@@ -21,9 +21,7 @@ import { signOut } from "next-auth/react";
 const drawerWidth = "20vw";
 
 export default function SideNavBar({ handleTabChange }) {
-
   const matches = useMediaQuery("(min-width: 660px)");
-  console.log(matches);
 
   return (
     <Box sx={{ display: "flex" }}>
