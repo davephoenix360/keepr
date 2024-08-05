@@ -21,6 +21,7 @@ import myColorScheme from "./colorscheme";
 
 export default function RecipeCard({ recipe }) {
   const [recipeViewOpen, setRecipeViewOpen] = useState(false);
+  const currDate = new Date();
 
   const handleRecipeViewOpen = () => {
     setRecipeViewOpen(true);
@@ -44,7 +45,7 @@ export default function RecipeCard({ recipe }) {
             </IconButton>
           }
           title={recipe.title}
-          subheader="September 14, 2016"
+          subheader={currDate.toLocaleDateString()}
         />
         {/* <CardMedia
             component="img"
@@ -93,7 +94,7 @@ export default function RecipeCard({ recipe }) {
                 </IconButton>
               }
               title={recipe.title}
-              subheader="September 14, 2016"
+              subheader={currDate.toLocaleDateString()}
             />
             <Stack padding={2} display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"} justifyContent={"space-between"} >
               <CardContent>
