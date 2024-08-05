@@ -28,8 +28,12 @@ import {
 } from "firebase/firestore";
 import { firestore } from "../utils/firebase";
 import myColorScheme from "./colorscheme";
+import { useSession } from "next-auth/react";
 
 export default function Pantrylist() {
+
+  const { data, session } = useSession();
+
   const newColorScheme = myColorScheme.newColorScheme;
   const buttonStyle = myColorScheme.buttonStyle;
   const tableStyle = myColorScheme.tableStyle;
@@ -42,7 +46,7 @@ export default function Pantrylist() {
   const [itemName, setItemName] = useState("");
 
   const updatePantrylist = async () => {
-    const snapshot = query(collection(firestore, "pantry"));
+    const snapshot = query(collection(firestore, (data.user.email +"pantry")));
     const docs = await getDocs(snapshot);
     const pantry = [];
     docs.forEach((doc) => {
@@ -52,7 +56,7 @@ export default function Pantrylist() {
   };
 
   const addItem = async (itemInfo) => {
-    const docRef = await doc(collection(firestore, "pantry"), itemInfo.name);
+    const docRef = await doc(collection(firestore, (data.user.email +"pantry")), itemInfo.name);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await updateDoc(docRef, {
@@ -80,7 +84,7 @@ export default function Pantrylist() {
   };
 
   const deleteItem = async (itemName) => {
-    const docRef = doc(firestore, "pantry", itemName);
+    const docRef = doc(firestore, (data.user.email +"pantry"), itemName);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() && docSnap.data().quantity == 1) {
       await deleteDoc(docRef);
@@ -104,13 +108,13 @@ export default function Pantrylist() {
     if (newItemName == itemInfo.name) {
       return;
     }
-    const newdocRef = doc(firestore, "pantry", newItemName);
+    const newdocRef = doc(firestore, (data.user.email +"pantry"), newItemName);
     const newdocSnap = await getDoc(newdocRef);
     if (newdocSnap.exists()) {
       alert("Item already exists");
       console.log(itemInfo);
     } else {
-      const docRef = doc(firestore, "pantry", itemInfo.name);
+      const docRef = doc(firestore, (data.user.email +"pantry"), itemInfo.name);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         await updateDoc(docRef, {

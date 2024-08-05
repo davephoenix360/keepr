@@ -78,7 +78,7 @@ function RecipesHandler() {
   }
 
   const updateIngredientlist = async () => {
-    const snapshot = query(collection(firestore, "pantry"));
+    const snapshot = query(collection(firestore, (data.user +"pantry")));
     const docs = await getDocs(snapshot);
     let pantry_items = "";
     docs.docs.forEach((doc) => {
