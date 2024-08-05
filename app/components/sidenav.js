@@ -15,12 +15,16 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import myColorScheme from "./colorscheme";
 const newColorScheme = myColorScheme.newColorScheme;
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import { signOut } from "next-auth/react";
 
-const drawerWidth = 180;
+const drawerWidth = "20vw";
 
 export default function SideNavBar({ handleTabChange }) {
+
+  const matches = useMediaQuery("(min-width: 660px)");
+  console.log(matches);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -54,7 +58,7 @@ export default function SideNavBar({ handleTabChange }) {
               <ListItemIcon>
                 <InventoryIcon sx={{ color: newColorScheme.lightBeige }} />
               </ListItemIcon>
-              <ListItemText primary="Pantry" />
+              {matches ? <ListItemText primary="Pantry" /> : null}
             </ListItemButton>
           </ListItem>
           <ListItem key="Recipes" disablePadding>
@@ -62,7 +66,7 @@ export default function SideNavBar({ handleTabChange }) {
               <ListItemIcon>
                 <MenuBookIcon sx={{ color: newColorScheme.lightBeige }} />
               </ListItemIcon>
-              <ListItemText primary="Recipes" />
+              {matches ? <ListItemText primary="Recipes" /> : null}
             </ListItemButton>
           </ListItem>
         </List>
